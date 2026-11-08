@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTCO Tachograph</title>
+<style>
+:root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#323636;background:#f5f5f2}*{box-sizing:border-box}body{margin:0;min-height:100vh}main{max-width:1160px;margin:auto;padding:58px 28px 32px}.eyebrow{font-size:10px;font-weight:bold;letter-spacing:3px;color:#7c817e}.intro{display:flex;justify-content:space-between;align-items:end;margin-bottom:68px}h1{font-size:27px;letter-spacing:-1px;font-weight:500;margin:12px 0 0}.badge{font-size:10px;letter-spacing:1.5px;border:1px solid #d6d9d4;border-radius:20px;padding:9px 13px;color:#747b74}.stage{position:relative;padding-bottom:95px;isolation:isolate}.device{container-type:inline-size;position:relative;width:100%;aspect-ratio:3.24;border-radius:1.15cqw;background:linear-gradient(115deg,#565854 0%,#333632 8%,#363935 48%,#292c29 92%,#50534f);box-shadow:0 2px 2px #191b19,inset 0 2px 3px #9c9e94,inset 0 -4px 4px #151815,0 16px 17px -13px #0009;z-index:2}.device:before{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.35' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}.stage:after{content:"";position:absolute;left:3%;right:3%;height:36px;top:calc(100% - 93px);background:#4a4b45;filter:blur(24px);opacity:.2;z-index:-1}.screw{position:absolute;left:1.55%;top:17%;width:1.25%;height:6%;border-radius:50%;background:radial-gradient(ellipse at 35% 25%,#fff 0,#aeb1a8 22%,#5a5d55 49%,#171a15 65%,#9a9b92 80%,#282a24 90%);box-shadow:0 0 2px #000}.screw:after{content:"";position:absolute;left:45%;top:23%;width:16%;height:48%;background:#383b35;transform:rotate(18deg)}.screw.r{left:auto;right:1.55%}.screw.b{top:77%}.screen-surround{position:absolute;left:5.45%;top:8.1%;width:43.3%;height:46.7%;background:#161b16;border-radius:.4cqw;box-shadow:inset 0 1px 3px #000,0 1px 1px #72756a;border:1px solid #22251e;padding:3.1% 1.1% 1.1%}.brand{position:absolute;top:2%;left:2%;font-weight:700;font-style:italic;letter-spacing:.15cqw;color:#d4d6ce;font-size:2cqw;line-height:1}.brand-icon{position:absolute;top:2%;left:46%;font-size:2cqw;color:#bec3b7;line-height:1}.lcd{width:100%;height:100%;background:#72776a;box-shadow:inset 0 2px 5px #242c22;border:1px solid #30362b;position:relative;overflow:hidden}.lcd:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,#fff1,transparent 70%);pointer-events:none}canvas{width:100%;height:100%;display:block;image-rendering:pixelated}.keys{position:absolute;left:6.4%;top:61.8%;width:40.7%;height:9.8%;display:flex;gap:1.1%}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:2px solid #b8d3a2;outline-offset:4px}.key,.driver,.release{border:1px solid #161914;border-radius:.55cqw;color:#c8ccc0;background:linear-gradient(#4a4d46,#363932);box-shadow:inset 0 1px 1px #686c61,0 1px 1px #72756a;font-size:2.2cqw;line-height:1;padding:0;touch-action:manipulation}.key{flex:1}.key:active,.driver:active,.release:active,.pressed{background:linear-gradient(#272c24,#373c31);box-shadow:inset 0 2px 3px #10150e;color:#fff}.key.ok{font-size:1.9cqw}.slot{position:absolute;top:77%;height:11.3%;background:linear-gradient(#262a24,#30352c);border:1px solid #161b14;box-shadow:0 1px 1px #656b5d,inset 0 2px 2px #20261d;border-radius:.5cqw;overflow:visible}.slot.one{left:9%;width:31.4%}.slot.two{left:59.4%;width:31.4%}.slot:before{content:"";position:absolute;top:17%;left:3%;right:3%;height:1px;background:#131a11;box-shadow:0 1px #41483b}.card{position:absolute;top:0;left:8%;width:84%;height:70%;background:linear-gradient(100deg,#b2b5a6,#e7e5cf);border-radius:0 0 .4cqw .4cqw;transform:translateY(-3%);transition:transform .3s,opacity .3s;opacity:0;color:#55594a;font-size:1.25cqw;padding:.2cqw 1cqw;box-shadow:0 2px 3px #0006}.card.inserted{transform:translateY(70%);opacity:1}.driver{position:absolute;top:77%;height:11.3%;width:7.2%;font-size:2cqw}.driver.d1{left:42.4%}.driver.d2{left:50.6%}.divider{position:absolute;left:50.7%;top:9%;height:46%;width:3.9%;background:linear-gradient(90deg,#282c25,#3b3f35);border:1px solid #20251d;border-radius:.3cqw;box-shadow:1px 0 1px #5f6356}.divider:before{content:"";position:absolute;left:23%;right:23%;top:16%;height:9%;border-top:2px solid #171d14;border-bottom:2px solid #555e4a}.printer{position:absolute;left:57.5%;top:8.2%;width:38.1%;height:62.9%;border:1px solid #151a12;border-radius:.7cqw;box-shadow:inset 0 0 0 .6cqw #3a3d35,inset 0 0 0 .8cqw #24291f,0 1px 1px #606754;background:linear-gradient(120deg,#393d34,#30352b)}.printer:after{content:"";position:absolute;bottom:20%;left:2%;right:2%;border-top:1px solid #1d2319;border-bottom:1px solid #4b5242}.release{position:absolute;width:29%;height:25%;left:35.5%;top:15%;border-radius:.3cqw;clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);background:linear-gradient(#171c13 4%,#42483a 16%,#3a4033 90%);font-size:0}.release:after{content:"";position:absolute;inset:20% 8% 0;border-top:1px solid #636b56}.paper{position:absolute;left:61.5%;top:63%;width:29.5%;height:0;overflow:hidden;background:#efefdf;color:#55584a;z-index:3;box-shadow:0 7px 9px #0003;transition:height .7s;font-family:monospace;font-size:1.35cqw;line-height:1.6;white-space:pre;text-align:center}.paper.out{height:72%;padding:1.3cqw .5cqw;border-bottom:2px dashed #c7c7b4}.stage.printing{padding-bottom:180px}.controls{border-top:1px solid #d8dcd5;padding-top:25px;display:grid;grid-template-columns:1fr 1fr;gap:38px}.label{font-size:10px;letter-spacing:1.8px;color:#7a8179;margin-bottom:14px}.drive-row{display:flex;align-items:center;gap:15px}.action{background:#343d32;color:#f5f5eb;border:1px solid #343d32;border-radius:5px;padding:11px 15px;font-size:12px;min-width:118px}.action.secondary{color:#555e50;background:transparent;border-color:#cdd3c7;min-width:0}.speed{flex:1;accent-color:#58674d;min-width:60px}output{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap;width:70px}.help{font-size:12px;line-height:1.8;color:#747c71;margin:0}.status{margin-top:22px;font-size:12px;color:#68775d;min-height:18px}.foot{display:flex;justify-content:space-between;gap:16px;border-top:1px solid #e0e3dc;margin-top:42px;padding-top:18px;font-size:10px;line-height:1.7;color:#92998b}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:650px){main{padding:30px 14px}.intro{margin-bottom:45px}h1{font-size:21px}.badge{font-size:8px;padding:7px 9px}.controls{grid-template-columns:1fr;gap:25px}.stage{padding-bottom:62px}.stage:after{top:calc(100% - 62px)}.stage.printing{padding-bottom:110px}.foot{margin-top:26px}.key,.driver{border-width:.5px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+body{background:#f5f5f2;display:flex;align-items:center;justify-content:center;min-height:100svh}main{width:100%;max-width:1160px;margin:auto;padding:30px 24px}.stage{padding-bottom:0}.stage:after{top:100%}.stage.printing{padding-bottom:240px}.device{user-select:none}.card{border:0;cursor:pointer;pointer-events:none}.card.available{opacity:1;transform:translateY(125%);pointer-events:auto;height:130%;z-index:5;background:linear-gradient(100deg,#ccd7df,#f4ead1);color:#4d5660;font-weight:bold}.slot.open{background:#11170f;box-shadow:inset 0 5px 8px #000;transform:translateY(15%)}.slot.open:after{content:'';position:absolute;top:80%;height:80%;left:0;right:0;background:linear-gradient(#383c32,#20251c);border:1px solid #10170e;transform:perspective(100px) rotateX(-25deg);z-index:-1}.printer{transition:transform .2s}.printer.open{transform:translateY(9%);box-shadow:0 -1.4cqw 0 #141a10,0 1cqw 2cqw #0008}.paper{white-space:pre;line-height:1.3;font-size:1.05cqw;cursor:pointer;max-height:85cqw;overflow:auto;scrollbar-width:none}.paper.out{height:auto;min-height:35cqw;padding:5cqw 1cqw 2cqw;text-align:left}.key,.driver{touch-action:none}.card:focus-visible,.paper:focus-visible{outline:2px solid #9caf8e}@media(max-width:650px){main{padding:18px 10px}.stage{padding-bottom:0}.stage:after{top:100%}.stage.printing{padding-bottom:190px}} 
+.driver-cards{display:grid;grid-template-columns:1fr 1fr;gap:5%;margin:66px 5% 12px;align-items:start}.identity-wrap{position:relative;min-width:0;transition:opacity .25s}.identity-wrap[hidden]{display:none}.identity-wrap.in-device{visibility:hidden;pointer-events:none}.identity-card{container-type:inline-size;position:relative;width:100%;aspect-ratio:1004/624;overflow:hidden;border-radius:5.4% / 8.6%;background:#f5f6f4;color:#575955;box-shadow:0 9px 18px -11px #18263277,0 0 1px #88979c;isolation:isolate;cursor:grab;touch-action:none;user-select:none}.identity-card:focus-visible{outline:2px solid #678fb5;outline-offset:6px}.identity-card.dragging{cursor:grabbing;z-index:30;box-shadow:0 18px 30px #13202d44}.security-art{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}.identity-card:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,#fff2 0,transparent 27%,#fff3 49%,transparent 65%);box-shadow:inset 0 0 1.2cqw #fff9;border-radius:inherit}.card-band{position:absolute;left:.5%;right:6.2%;top:3.7%;height:12.3%;background:linear-gradient(92deg,#1454a6,#155ab5 54%,#004aaa);box-shadow:0 .45cqw .2cqw #256abe55}.card-band:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,#e4efff33 0 .1cqw,transparent .1cqw .3cqw);mask-image:linear-gradient(90deg,#000,transparent)}.card-heading{position:absolute;right:6.8%;top:5.5%;font-family:Arial,Helvetica,sans-serif;font-size:4.1cqw;font-weight:900;font-style:italic;letter-spacing:.03cqw;color:#c1d7ed;line-height:1.2}.bus-logo{position:absolute;left:3.75%;top:3.9%;width:17.8%;height:19.1%;display:flex;align-items:center;justify-content:center;background:linear-gradient(130deg,#0757b1,#004bab);box-shadow:0 0 .5cqw #286dcf}.bus-logo svg{width:57%;height:52%;overflow:visible}.card-portrait{position:absolute;left:2.5%;top:28%;width:22.5%;height:44.2%;background:#fff;border:.15cqw solid #252525;border-radius:.6cqw;overflow:hidden}.card-portrait svg{width:100%;height:100%;display:block}.identity-card .printed{position:absolute;font-family:'Bahnschrift','Arial Narrow',Arial,sans-serif;font-stretch:condensed;font-size:3.12cqw;line-height:1.1;text-shadow:.1cqw .12cqw .2cqw #7a7f7470;white-space:nowrap;z-index:2}.card-name{left:28.1%;top:27.6%;max-width:67%;border:0;padding:0;background:transparent;color:inherit;font-weight:700;cursor:text;overflow:hidden;text-overflow:ellipsis;text-align:left}.card-name:hover{background:#ffffff38}.name-input{left:28.1%;top:26.8%;width:67%;height:6.5%;border:0;border-bottom:.22cqw solid #1659a5;outline:none!important;background:#f8faf1ed;color:#454d55;font-weight:700;padding:0;user-select:text;touch-action:manipulation}.identity-card .card-valid{left:28.1%;top:37.2%;font-weight:400;color:#76786b}.valid-date{margin-left:2.5cqw;color:#555953}.identity-card .card-authority{left:28%;top:54.3%;font-size:3.13cqw}.identity-card .card-number{left:28.1%;top:62.1%;font-size:3.13cqw}.identity-card .card-serial{left:28.1%;top:69.8%;color:#71796c;font-size:3.13cqw}.identity-card .signature{left:40.9%;top:82%;width:54%;font-family:'Segoe Script','Brush Script MT',cursive;font-style:italic;font-size:5.2cqw;line-height:1.3;color:#444b4b;transform:rotate(-3deg);text-shadow:.15cqw .3cqw .35cqw #686f6b80;overflow:hidden;text-overflow:ellipsis}.slot.drop-ready{outline:2px solid #b6d9b5;box-shadow:0 0 12px #b6d9b577}.identity-wrap.moving{pointer-events:none}.driver-cards:has(.identity-wrap.dragging){position:relative;z-index:20}@media(max-width:650px){.driver-cards{grid-template-columns:1fr;margin:48px 4% 10px;gap:28px}.identity-card{max-width:520px;margin:auto}.identity-wrap.in-device{display:none}}
+
+
+html,body{background:transparent!important;min-height:0!important;height:100%;overflow:hidden}main{padding:8px!important;margin:0!important;max-width:none!important;align-self:start}.stage{padding-bottom:0!important}.stage:after{display:none}.device{ -webkit-app-region:drag}.device button,.keys,.slot,.paper,.identity-card{ -webkit-app-region:no-drag}.driver-cards{margin-top:30px!important}.hide-cards .driver-cards{display:none}.no-card-alert{box-shadow:inset 0 0 4px #151a0b}.paper.out{max-height:40vh;overflow:auto}.desktop-overlay{align-items:start!important}.identity-card{max-width:none}.desktop-overlay .identity-card{touch-action:none}.identity-wrap.in-device{opacity:0}.identity-wrap.in-device .identity-card{display:none}
+</style>
+</head>
+<body>
+<main>
+<section class="stage" aria-label="Tachograph nach Fotovorlage">
+<div class="device">
+<i class="screw"></i><i class="screw r"></i><i class="screw b"></i><i class="screw r b"></i>
+<div class="screen-surround"><span class="brand">VDO</span><span class="brand-icon">◉</span><div class="lcd"><canvas id="screen" width="340" height="66" aria-hidden="true"></canvas><span id="screenText" class="sr" role="status"></span></div></div>
+<div class="divider"></div>
+<nav class="keys" aria-label="Gerätetasten"><button class="key" data-key="back" aria-label="Zurück" title="Zurück · Escape">↩</button><button class="key" data-key="up" aria-label="Nach oben" title="Nach oben · Pfeiltaste hoch">▴</button><button class="key" data-key="down" aria-label="Nach unten" title="Nach unten · Pfeiltaste runter">▾</button><button class="key ok" data-key="ok" aria-label="Menü öffnen oder bestätigen" title="Menü / Bestätigen · Enter">OK</button></nav>
+<div class="slot one"><button class="card" id="card1" aria-label="Fahrerkarte 1 einlegen">FAHRERKARTE · 1</button></div><button class="driver d1" data-driver="1" aria-label="Fahrer 1: kurz Aktivität wechseln, zwei Sekunden halten für Kartenschacht" title="Kurz: Aktivität · 2 Sekunden: Karte">♙₁</button><button class="driver d2" data-driver="2" aria-label="Fahrer 2: kurz Aktivität wechseln, zwei Sekunden halten für Kartenschacht" title="Kurz: Aktivität · 2 Sekunden: Karte">♙₂</button><div class="slot two"><button class="card" id="card2" aria-label="Fahrerkarte 2 einlegen">FAHRERKARTE · 2</button></div>
+<div class="printer"><button class="release" id="print" aria-label="Druckerschublade öffnen oder schliessen" title="Druckerschublade öffnen / schliessen">Drucken</button></div><div id="paper" class="paper" role="button" tabindex="0" aria-label="Ausdruck abreissen" title="Ausdruck abreissen" aria-hidden="true"></div>
+</div></section>
+<section class="driver-cards" aria-label="Fahrerkarten"><div class="identity-wrap" data-card-wrap="0"><div class="identity-card" tabindex="0" aria-label="Fahrerkarte; Name mit Doppelklick bearbeiten" data-identity="0">
+<svg class="security-art" viewBox="0 0 1004 624" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+<pattern id="words0" width="1050" height="118" patternUnits="userSpaceOnUse" patternTransform="skewX(-14)"><g fill="none" stroke="#a8bdc7" stroke-width=".75" opacity=".58" font-family="Arial" font-style="italic" font-size="30" font-weight="bold"><text x="-70" y="32">FAHRERKARTE CARTA DEL CONDUCENTE FAHRERKARTE</text><text x="-45" y="72">ΚΑΡΤΑ ΟΔΗΓΟΥ CARTE DE CONDUCTEUR ΚΑΡΤΑ ΟΔΗΓΟΥ</text><text x="-110" y="112">DRIVER CARD TARJETA DEL CONDUCTOR DRIVER CARD</text></g></pattern>
+<pattern id="fine0" width="9" height="6" patternUnits="userSpaceOnUse"><path d="M0 1 Q2 -1 4 1 T9 1 M0 4 Q2 2 4 4 T9 4" fill="none" stroke="#a0bbc7" stroke-width=".3" opacity=".6"/></pattern>
+<filter id="grain0"><feTurbulence type="fractalNoise" baseFrequency=".48" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1004" height="624" fill="#f3f5f2"/>
+<g stroke="#c9cec5" fill="none" opacity=".55"><path d="M-200 470Q500 -150 1200 380 M-190 479Q500 -130 1200 390 M-180 488Q500 -110 1200 400 M-170 497Q500 -90 1200 410 M-160 506Q500 -70 1200 420 M-150 515Q500 -50 1200 430 M-140 524Q500 -30 1200 440" stroke-width="2"/><path d="M-70 670Q550 220 1100 510 M-65 655Q550 200 1100 495 M-60 640Q550 180 1100 480 M-55 625Q550 160 1100 465 M-50 610Q550 140 1100 450 M-45 595Q550 120 1100 435"/><path d="M80 -100Q500 400 1090 650 M100 -100Q520 400 1110 650 M120 -100Q540 400 1130 650 M140 -100Q560 400 1150 650 M160 -100Q580 400 1170 650"/></g>
+<g fill="none" stroke="#adc5d1" opacity=".6"><path d="M-40 120C180 300 530 -130 1100 50 M-40 128C180 308 530 -122 1100 58 M-40 136C180 316 530 -114 1100 66 M-40 144C180 324 530 -106 1100 74 M-40 152C180 332 530 -98 1100 82 M-40 160C180 340 530 -90 1100 90"/><path d="M0 620C280 620 720 100 1100 230 M0 612C280 612 720 92 1100 222 M0 604C280 604 720 84 1100 214 M0 596C280 596 720 76 1100 206 M0 588C280 588 720 68 1100 198 M0 580C280 580 720 60 1100 190"/></g>
+<rect width="1004" height="624" fill="url(#words0)"/><rect width="1004" height="624" fill="url(#fine0)"/>
+<rect width="1004" height="624" opacity=".075" filter="url(#grain0)"/>
+</svg>
+<div class="card-band"></div><div class="card-heading">FAHRERKARTE</div>
+<div class="bus-logo"><svg viewBox="0 0 103 55" aria-label="THE BUS"><path d="M3 51V4Q3 2 6 2H94Q99 2 99 7V46Q99 51 94 51Z" fill="none" stroke="#ffdd00" stroke-width="2.2"/><text x="8" y="49" transform="rotate(-90 8 49)" fill="white" font-size="18" font-family="Arial" font-weight="900">THE</text><text x="15" y="43" fill="white" font-size="44" font-family="Arial Narrow,Arial" font-weight="900" textLength="79" lengthAdjust="spacingAndGlyphs">BUS</text></svg></div>
+<div class="card-portrait"><svg viewBox="0 0 225 275" aria-hidden="true"><defs><clipPath id="portrait0"><ellipse cx="112.5" cy="137.5" rx="137" ry="137.5"/></clipPath></defs><g clip-path="url(#portrait0)"><rect width="225" height="275" fill="#b8e0e3"/><path d="M-5 275L1 229Q9 183 74 175L147 175Q198 182 205 217L215 275" fill="#c5c3c3"/><path d="M-5 275L1 229Q9 183 74 175L104 275Z" fill="#989795"/><path d="M91 139L130 139L129 177L110 202L92 177Z" fill="#f0caa5"/><path d="M91 151L129 165L129 177L111 188L92 177Z" fill="#e5bd98"/><path d="M62 78Q43 70 51 100Q54 116 65 111M145 78Q162 70 156 99Q153 116 144 111" fill="#f6cfaa"/><path d="M60 57Q64 34 112 35Q155 40 148 79L140 131Q137 146 112 154Q91 153 74 142Q65 134 63 111Z" fill="#f8d3b0"/><path d="M62 111L54 88Q40 60 54 25L59 20L62 25Q115 5 151 20Q167 43 153 86L145 112L137 111L145 79Q147 62 132 54Q111 43 65 53L62 76L70 111Z" fill="#363531"/><path d="M74 169L98 176L108 187L76 190Z M98 176L131 168L130 189L110 185Z" fill="#fffdf5"/><path d="M82 188L106 275L99 187Z M127 187L108 275L114 188Z" fill="#f7f6ee"/><path d="M95 179L111 179L112 189L108 191L114 243L104 275L94 240L98 190L94 188Z" fill="#30302c"/></g></svg></div>
+<button class="printed card-name" type="button" title="Doppelklick zum Ändern des Namens" data-name="0">{Spielername}</button>
+<input class="printed name-input" data-name-input="0" maxlength="36" aria-label="Name auf der Fahrerkarte" autocomplete="off" spellcheck="false" hidden>
+<div class="printed card-valid">Gültig bis:<span class="valid-date">28.05.2030</span></div>
+<div class="printed card-authority">4.c <b>Fahrerlaubnisbehörde TML Studios</b></div>
+<div class="printed card-number">5.a <b>A1234567890</b></div>
+<div class="printed card-serial">5.b DF00003563691000</div>
+<div class="printed signature" data-signature="0">Spieler Name</div>
+</div>
+</div><div class="identity-wrap" data-card-wrap="1"><div class="identity-card" tabindex="0" aria-label="Fahrerkarte; Name mit Doppelklick bearbeiten" data-identity="1">
+<svg class="security-art" viewBox="0 0 1004 624" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+<pattern id="words1" width="1050" height="118" patternUnits="userSpaceOnUse" patternTransform="skewX(-14)"><g fill="none" stroke="#a8bdc7" stroke-width=".75" opacity=".58" font-family="Arial" font-style="italic" font-size="30" font-weight="bold"><text x="-70" y="32">FAHRERKARTE CARTA DEL CONDUCENTE FAHRERKARTE</text><text x="-45" y="72">ΚΑΡΤΑ ΟΔΗΓΟΥ CARTE DE CONDUCTEUR ΚΑΡΤΑ ΟΔΗΓΟΥ</text><text x="-110" y="112">DRIVER CARD TARJETA DEL CONDUCTOR DRIVER CARD</text></g></pattern>
+<pattern id="fine1" width="9" height="6" patternUnits="userSpaceOnUse"><path d="M0 1 Q2 -1 4 1 T9 1 M0 4 Q2 2 4 4 T9 4" fill="none" stroke="#a0bbc7" stroke-width=".3" opacity=".6"/></pattern>
+<filter id="grain1"><feTurbulence type="fractalNoise" baseFrequency=".48" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="1004" height="624" fill="#f3f5f2"/>
+<g stroke="#c9cec5" fill="none" opacity=".55"><path d="M-200 470Q500 -150 1200 380 M-190 479Q500 -130 1200 390 M-180 488Q500 -110 1200 400 M-170 497Q500 -90 1200 410 M-160 506Q500 -70 1200 420 M-150 515Q500 -50 1200 430 M-140 524Q500 -30 1200 440" stroke-width="2"/><path d="M-70 670Q550 220 1100 510 M-65 655Q550 200 1100 495 M-60 640Q550 180 1100 480 M-55 625Q550 160 1100 465 M-50 610Q550 140 1100 450 M-45 595Q550 120 1100 435"/><path d="M80 -100Q500 400 1090 650 M100 -100Q520 400 1110 650 M120 -100Q540 400 1130 650 M140 -100Q560 400 1150 650 M160 -100Q580 400 1170 650"/></g>
+<g fill="none" stroke="#adc5d1" opacity=".6"><path d="M-40 120C180 300 530 -130 1100 50 M-40 128C180 308 530 -122 1100 58 M-40 136C180 316 530 -114 1100 66 M-40 144C180 324 530 -106 1100 74 M-40 152C180 332 530 -98 1100 82 M-40 160C180 340 530 -90 1100 90"/><path d="M0 620C280 620 720 100 1100 230 M0 612C280 612 720 92 1100 222 M0 604C280 604 720 84 1100 214 M0 596C280 596 720 76 1100 206 M0 588C280 588 720 68 1100 198 M0 580C280 580 720 60 1100 190"/></g>
+<rect width="1004" height="624" fill="url(#words1)"/><rect width="1004" height="624" fill="url(#fine1)"/>
+<rect width="1004" height="624" opacity=".075" filter="url(#grain1)"/>
+</svg>
+<div class="card-band"></div><div class="card-heading">FAHRERKARTE</div>
+<div class="bus-logo"><svg viewBox="0 0 103 55" aria-label="THE BUS"><path d="M3 51V4Q3 2 6 2H94Q99 2 99 7V46Q99 51 94 51Z" fill="none" stroke="#ffdd00" stroke-width="2.2"/><text x="8" y="49" transform="rotate(-90 8 49)" fill="white" font-size="18" font-family="Arial" font-weight="900">THE</text><text x="15" y="43" fill="white" font-size="44" font-family="Arial Narrow,Arial" font-weight="900" textLength="79" lengthAdjust="spacingAndGlyphs">BUS</text></svg></div>
+<div class="card-portrait"><svg viewBox="0 0 225 275" aria-hidden="true"><defs><clipPath id="portrait1"><ellipse cx="112.5" cy="137.5" rx="137" ry="137.5"/></clipPath></defs><g clip-path="url(#portrait1)"><rect width="225" height="275" fill="#b8e0e3"/><path d="M-5 275L1 229Q9 183 74 175L147 175Q198 182 205 217L215 275" fill="#c5c3c3"/><path d="M-5 275L1 229Q9 183 74 175L104 275Z" fill="#989795"/><path d="M91 139L130 139L129 177L110 202L92 177Z" fill="#f0caa5"/><path d="M91 151L129 165L129 177L111 188L92 177Z" fill="#e5bd98"/><path d="M62 78Q43 70 51 100Q54 116 65 111M145 78Q162 70 156 99Q153 116 144 111" fill="#f6cfaa"/><path d="M60 57Q64 34 112 35Q155 40 148 79L140 131Q137 146 112 154Q91 153 74 142Q65 134 63 111Z" fill="#f8d3b0"/><path d="M62 111L54 88Q40 60 54 25L59 20L62 25Q115 5 151 20Q167 43 153 86L145 112L137 111L145 79Q147 62 132 54Q111 43 65 53L62 76L70 111Z" fill="#363531"/><path d="M74 169L98 176L108 187L76 190Z M98 176L131 168L130 189L110 185Z" fill="#fffdf5"/><path d="M82 188L106 275L99 187Z M127 187L108 275L114 188Z" fill="#f7f6ee"/><path d="M95 179L111 179L112 189L108 191L114 243L104 275L94 240L98 190L94 188Z" fill="#30302c"/></g></svg></div>
+<button class="printed card-name" type="button" title="Doppelklick zum Ändern des Namens" data-name="1">{Spielername}</button>
+<input class="printed name-input" data-name-input="1" maxlength="36" aria-label="Name auf der Fahrerkarte" autocomplete="off" spellcheck="false" hidden>
+<div class="printed card-valid">Gültig bis:<span class="valid-date">28.05.2030</span></div>
+<div class="printed card-authority">4.c <b>Fahrerlaubnisbehörde TML Studios</b></div>
+<div class="printed card-number">5.a <b>A1234567890</b></div>
+<div class="printed card-serial">5.b DF00003563691000</div>
+<div class="printed signature" data-signature="1">Spieler Name</div>
+</div>
+</div></section>
+</main>
+<script>
+'use strict';
+async function startDevice(){
+const initial=await window.tachograph.boot();
+if(initial.ui)localStorage.setItem('dtco-desktop-v1',JSON.stringify(initial.ui));
+'use strict';
+const $=s=>document.querySelector(s), canvas=$('#screen'),ctx=canvas.getContext('2d');
+// Selbst enthaltene Punktmatrix: keine Schriftdateien oder externen Ressourcen.
+const font={
+'0':['01110','10001','10011','10101','11001','10001','01110'],'1':['00100','01100','00100','00100','00100','00100','01110'],'2':['01110','10001','00001','00010','00100','01000','11111'],'3':['11110','00001','00001','01110','00001','00001','11110'],'4':['00010','00110','01010','10010','11111','00010','00010'],'5':['11111','10000','10000','11110','00001','00001','11110'],'6':['01110','10000','10000','11110','10001','10001','01110'],'7':['11111','00001','00010','00100','01000','01000','01000'],'8':['01110','10001','10001','01110','10001','10001','01110'],'9':['01110','10001','10001','01111','00001','00001','01110'],
+'A':['01110','10001','10001','11111','10001','10001','10001'],'B':['11110','10001','10001','11110','10001','10001','11110'],'C':['01111','10000','10000','10000','10000','10000','01111'],'D':['11110','10001','10001','10001','10001','10001','11110'],'E':['11111','10000','10000','11110','10000','10000','11111'],'F':['11111','10000','10000','11110','10000','10000','10000'],'G':['01111','10000','10000','10111','10001','10001','01111'],'H':['10001','10001','10001','11111','10001','10001','10001'],'I':['11111','00100','00100','00100','00100','00100','11111'],'J':['00001','00001','00001','00001','10001','10001','01110'],'K':['10001','10010','10100','11000','10100','10010','10001'],'L':['10000','10000','10000','10000','10000','10000','11111'],'M':['10001','11011','10101','10101','10001','10001','10001'],'N':['10001','11001','10101','10011','10001','10001','10001'],'O':['01110','10001','10001','10001','10001','10001','01110'],'P':['11110','10001','10001','11110','10000','10000','10000'],'Q':['01110','10001','10001','10001','10101','10010','01101'],'R':['11110','10001','10001','11110','10100','10010','10001'],'S':['01111','10000','10000','01110','00001','00001','11110'],'T':['11111','00100','00100','00100','00100','00100','00100'],'U':['10001','10001','10001','10001','10001','10001','01110'],'V':['10001','10001','10001','10001','10001','01010','00100'],'W':['10001','10001','10001','10101','10101','11011','10001'],'X':['10001','10001','01010','00100','01010','10001','10001'],'Y':['10001','10001','01010','00100','00100','00100','00100'],'Z':['11111','00001','00010','00100','01000','10000','11111'],
+'k':['10000','10000','10010','10100','11000','10100','10010'],'m':['00000','00000','11010','10101','10101','10101','10101'],'h':['10000','10000','10110','11001','10001','10001','10001'],':':['00000','00100','00100','00000','00100','00100','00000'],'.':['00000','00000','00000','00000','00000','00100','00100'],'/':['00001','00001','00010','00100','01000','10000','10000'],'-':['00000','00000','00000','11111','00000','00000','00000'],'>':['10000','01000','00100','00010','00100','01000','10000'],'o':['00000','01110','10001','10101','10001','01110','00000'],'b':['10000','10000','10000','11111','10101','11111','10001'],'c':['01111','01001','01001','01001','01001','11111','11111'],'w':['00000','10101','01110','00100','01110','10101','00000']};
+// Bedienabläufe: DTCO 4.1, BA00.1381.41 100 101, Ausgabe 2023-02,
+// Seiten 22, 45–46, 52–69, 79–81, 87–104, 123–125.
+// Lokales Modell; keine Verbindung zu Karten, GNSS oder Fahrzeugbus.
+const SY={rest:'▱',work:'⚒',ready:'◇',drive:'⊙',card:'▣',vehicle:'▰',print:'▤',local:'◷',ferry:'≈'};
+Object.assign(font,{
+'▱':['00000','10000','10000','11111','10101','11111','10001'],
+'⚒':['10001','11011','01110','00100','01110','11011','10001'],
+'◇':['11111','10011','10101','11001','10001','11111','00000'],
+'⊙':['01110','10001','10101','11111','10101','10001','01110'],
+'▣':['01111','01001','01001','01001','01001','11111','11111'],
+'▰':['00000','11100','10110','11111','10001','01010','00000'],
+'▤':['01110','01010','11111','10001','11111','01010','01110'],
+'◷':['01110','10101','10101','10111','10001','01110','00000'],
+'≈':['00100','00100','11111','01110','00000','01010','10101'],
+'?':['01110','10001','00001','00010','00100','00000','00100'],
+'!':['00100','00100','00100','00100','00100','00000','00100'],
+'+':['00000','00100','00100','11111','00100','00100','00000'],
+'=':['00000','00000','11111','00000','11111','00000','00000'],
+'<':['00001','00010','00100','01000','00100','00010','00001']
+});
+const storeKey='dtco-desktop-v1';
+// Separate lower-case glyphs; pictograms never share letter codepoints.
+Object.assign(font,{
+a:['00000','00000','01110','00001','01111','10001','01111'],
+b:['10000','10000','10110','11001','10001','10001','11110'],
+c:['00000','00000','01110','10000','10000','10001','01110'],
+d:['00001','00001','01101','10011','10001','10001','01111'],
+e:['00000','00000','01110','10001','11111','10000','01110'],
+f:['00110','01001','01000','11100','01000','01000','01000'],
+g:['00000','01111','10001','10001','01111','00001','01110'],
+h:['10000','10000','10110','11001','10001','10001','10001'],
+i:['00100','00000','01100','00100','00100','00100','01110'],
+j:['00010','00000','00110','00010','00010','10010','01100'],
+k:['10000','10000','10010','10100','11000','10100','10010'],
+l:['01100','00100','00100','00100','00100','00100','01110'],
+m:['00000','00000','11010','10101','10101','10101','10101'],
+n:['00000','00000','10110','11001','10001','10001','10001'],
+o:['00000','00000','01110','10001','10001','10001','01110'],
+p:['00000','11110','10001','10001','11110','10000','10000'],
+q:['00000','01111','10001','10001','01111','00001','00001'],
+r:['00000','00000','10110','11001','10000','10000','10000'],
+s:['00000','00000','01111','10000','01110','00001','11110'],
+t:['01000','01000','11100','01000','01000','01001','00110'],
+u:['00000','00000','10001','10001','10001','10011','01101'],
+v:['00000','00000','10001','10001','10001','01010','00100'],
+w:['00000','00000','10001','10001','10101','10101','01010'],
+x:['00000','00000','10001','01010','00100','01010','10001'],
+y:['00000','10001','10001','10001','01111','00001','01110'],
+z:['00000','00000','11111','00010','00100','01000','11111'],
+'ä':['01010','00000','01110','00001','01111','10001','01111'],
+'ö':['01010','00000','01110','10001','10001','10001','01110'],
+'ü':['01010','00000','10001','10001','10001','10011','01101'],
+'Ä':['01010','01110','10001','10001','11111','10001','10001'],
+'Ö':['01010','01110','10001','10001','10001','10001','01110'],
+'Ü':['01010','00000','10001','10001','10001','10001','01110'],
+'ß':['01100','10010','10010','10100','10010','10010','10100'],
+'$':['00100','01111','10100','01110','00101','11110','00100'],
+'%':['11001','11010','00010','00100','01000','01011','10011'],
+'(':['00010','00100','01000','01000','01000','00100','00010'],
+')':['01000','00100','00010','00010','00010','00100','01000'],
+' ':['00000','00000','00000','00000','00000','00000','00000']
+});
+function glyph(text,x,y,scale=3.35){for(const ch of text.normalize('NFC')){const g=font[ch]||font['?'];g.forEach((row,r)=>[...row].forEach((v,c)=>{if(v==='1'){ctx.fillStyle='#d9decf';ctx.fillRect(x+c*scale,y+r*scale,scale*.88,scale*.88)}}));x+=6*scale}}
+const fresh=()=>({offset:-new Date().getTimezoneOffset(),km:95.4,out:false,ferry:false,country:'CH',logs:[],drivers:[0,1].map((_,i)=>({name:'Fahrer '+(i+1),inserted:false,known:false,activity:0,since:Date.now(),lastOut:Date.now()-12*3600000,its:false,vdo:false,country:'CH'}))});
+let state=fresh();try{const x=JSON.parse(localStorage.getItem(storeKey));if(x&&x.drivers?.length===2&&Array.isArray(x.logs))state={...state,...x}}catch{}
+const activities=[SY.rest,SY.work,SY.ready],activityNames=['Ruhe','Arbeit','Bereitschaft'];
+const countries='A AL AND ARM AZ B BG BIH BY CH CY CZ D DK E EST F FIN FL FR GE GR H HR I IRL IS KZ L LT LV M MC MD MK MNE N NL P PL RO RSM RUS S SK SLO SRB TR UA UK UZ V WLD'.split(' '),regions='AN AR AST C CAT CL CM CV EXT G IB IC LR M MU NA PV'.split(' ');
+let view={type:'home',index:0},stack=[],notice=null,lastInput=Date.now(),flow=null,openSlots=[false,false],printerOpen=false,printing=null,blink=true;
+const save=()=>{try{localStorage.setItem(storeKey,JSON.stringify(state));window.tachograph.saveDevice(JSON.parse(JSON.stringify(state))).catch(e=>info('Speicherfehler',e.message.slice(0,16)))}catch{}};
+const pad=n=>String(n).padStart(2,'0');
+const localDate=(ms=Date.now())=>new Date(ms+state.offset*60000);
+const dateText=(ms=Date.now(),local=true)=>{let d=local?localDate(ms):new Date(ms);return pad(d.getUTCDate())+'.'+pad(d.getUTCMonth()+1)+'.'+d.getUTCFullYear()};
+const timeText=(ms=Date.now(),local=true)=>{let d=local?localDate(ms):new Date(ms);return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())};
+const stamp=ms=>dateText(ms).slice(0,6)+dateText(ms).slice(-2)+' '+timeText(ms);
+const dur=ms=>pad(Math.floor(ms/3600000))+'h'+pad(Math.floor(ms/60000)%60);
+function log(kind,data={},at=Date.now()){state.logs.push({kind,at,...data});if(state.logs.length>4000)state.logs.shift();save();if(kind==='Nachtrag'){window.tachograph.manual({slot:data.driver,start:data.start,end:data.end,activity:['rest','work','ready'][data.activity]||'unknown'}).then(r=>{if(!r.ok)info('Nachtrag Fehler',r.error.slice(0,16))})}else window.tachograph.event({type:kind,payload:{...data,at},slot:data.driver})}
+function home(){view={type:'home',index:0};stack=[];flow=null;notice=null;draw()}
+function show(v){stack.push(view);view=v;notice=null;draw()}
+function back(){notice=null;view=stack.pop()||{type:'home',index:0};draw()}
+function info(a,b='',ms=3000,done){notice={a,b,end:Date.now()+ms,done};draw()}
+function saved(){save();info('Eingabe','gespeichert')}
+function choose(title,values,accept,index=0,format=x=>String(x)){show({type:'choice',title,values,index,accept,format})}
+function yesno(title,label,accept,initial=true){choose(title,[true,false],accept,initial?0:1,x=>label.padEnd(12,' ')+(x?'Ja':'Nein'))}
+function country(title,accept){choose(title,countries,c=>{if(c==='E')choose(title.replace('Land','Region'),regions,r=>accept(c,r));else accept(c,'')},Math.max(0,countries.indexOf(state.country)),c=>':'+c)}
+function driverSymbol(i){return activities[state.drivers[i].activity]}
+function totals(i){let d=state.drivers[i];return dur(Date.now()-d.since)}
+function firstPages(){return [
+[timeText()+'◷ ⊙   0km/h',(state.out?'OUT':state.ferry?'≈':driverSymbol(0)+(state.drivers[0].inserted?'▣':' '))+' '+state.km.toFixed(1).padStart(8)+'km'+(state.drivers[1].inserted?'▣':' ')+driverSymbol(1)],
+['1⊙00h00 ▱00h00','1⊙00h00 '+driverSymbol(0)+totals(0)],['2⊙00h00 ▱00h00','2⊙00h00 '+driverSymbol(1)+totals(1)],
+['UTC '+dateText(Date.now(),false),timeText(Date.now(),false)+'    '+(state.offset>=0?'+':'-')+dur(Math.abs(state.offset)*60000)],['Sprache','wählen?'],['Menüfunktionen','aufrufen?']];}
+function renderLines(){
+if(notice)return [notice.a,notice.b];
+if(view.type==='home')return firstPages()[view.index];
+if(view.type==='menu'){let n=view.nodes[view.index];return [view.title||n.group,n.label]}
+if(view.type==='choice')return [view.title,view.format(view.values[view.index])];
+if(view.type==='reading')return [view.lines[view.index]||'',view.lines[view.index+1]||''];
+if(view.type==='manual'){let f=flow;return ['M '+stamp(f.start),activities[f.act]+' '+stamp(f.end)]}
+if(view.type==='clock')return ['UTC '+dateText(Date.now(),false),timeText(Date.now(),false)+'    '+timeText(Date.now()+(view.offset-state.offset)*60000)+'◷'];
+if(view.type==='wait')return view.lines;
+return ['',''];
+}
+function draw(){ctx.fillStyle='#62685c';ctx.fillRect(0,0,340,66);ctx.fillStyle='#707568';for(let x=0;x<340;x+=3)for(let y=0;y<66;y+=3)ctx.fillRect(x,y,1,1);
+let lines=renderLines();for(let i=0;i<2;i++){let line=lines[i]||'';if(view.type==='manual'&&!notice&&!blink&&i===1){const ranges=[[0,1],[2,2],[5,2],[8,2],[11,2],[14,2]],r=ranges[view.field];line=line.slice(0,r[0])+' '.repeat(r[1])+line.slice(r[0]+r[1])}glyph(line.slice(0,16),6,i?38:8,3.35)}
+const text=lines.join(' / ');if($('#screenText').textContent!==text)$('#screenText').textContent=text;
+}
+function menu(title,nodes){show({type:'menu',title,nodes,index:0})}
+function entry(label,run,group){return {label,run,group}}
+function rootMenu(){let nodes=[];for(const group of ['Ausdruck','Eingabe','Anzeige']){for(let i=0;i<2;i++)if(group==='Eingabe'||state.drivers[i].inserted)nodes.push(entry((group==='Eingabe'?'':'▣')+' Fahrer '+(i+1),()=>driverMenu(group,i),group));nodes.push(entry('▰ Fahrzeug',()=>vehicleMenu(group),group))}menu('',nodes)}
+function reportMenu(group,i){let types=['24h Tageswert','!x Ereignis'];if(group==='Ausdruck')types.push('Aktivitäten');menu('▣ Fahrer '+(i+1),types.map(t=>entry(t,()=>reportSelect(group,'Fahrer '+(i+1),t,i))))}
+function driverMenu(group,i){if(group!=='Eingabe'){reportMenu(group,i);return}menu('Fahrer '+(i+1),[
+entry('◷> Beginn Land',()=>landEntry(i,true)),entry('<◷ Ende Land',()=>landEntry(i,false)),
+entry('? Einstellungen',()=>{if(!state.drivers[i].inserted){info('▣ Keine Daten!');return}menu('Einstellungen',[
+entry('ITS Daten',()=>yesno((i+1)+' ITS Daten','ausgeben?',v=>{state.drivers[i].its=v;back();saved()},state.drivers[i].its)),
+entry('VDO Daten',()=>yesno((i+1)+' VDO Daten','ausgeben?',v=>{state.drivers[i].vdo=v;back();saved()},state.drivers[i].vdo)),
+entry('Meine Firma',()=>country('Meine Firma',c=>{state.drivers[i].company=c;back();saved()}))])}),
+entry('Bluetooth',()=>{if(!state.drivers[i].inserted){info('▣ Keine Daten!');return}if(!state.drivers[i].its){info('ITS Daten','freigeben!');return}menu('Bluetooth',[entry('pairing',()=>{show({type:'wait',lines:['pairing','Bitte verbinden']});info('pairing','Bitte verbinden',10000,()=>{back();info('Kein Bluetooth','verfügbar')})})])}),
+entry('Verschiedenes',()=>info('Keine Funktion','konfiguriert'))])}
+function landEntry(i,start){if(!state.drivers[i].inserted){info('▣ Keine Daten!');return}country(start?'◷> Beginn Land':'<◷ Ende Land',(c,r)=>{state.country=c;state.drivers[i].country=c;log(start?'Beginn Land':'Ende Land',{driver:i,country:c,region:r});back();if(view.type==='choice')back();saved()})}
+function vehicleMenu(group){if(group==='Eingabe'){menu('▰ Fahrzeug',[
+entry(state.out?'OUT Ende':'OUT Beginn',()=>{state.out=!state.out;log('OUT',{active:state.out});view.nodes[0].label=state.out?'OUT Ende':'OUT Beginn';saved()}),
+entry(state.ferry?'≈ Ende':'≈ Beginn',()=>{state.ferry=!state.ferry;log('Fähre/Zug',{active:state.ferry});view.nodes[1].label=state.ferry?'≈ Ende':'≈ Beginn';saved()}),
+entry('Laden/Entladen',()=>choose('Laden/Entladen',['Laden','Entladen','Laden/Entladen'],v=>{log(v,{location:'GNSS nicht verfügbar'});back();saved()})),
+entry('◷ Ortszeit',()=>show({type:'clock',offset:state.offset})),entry('Zeit Untern.',()=>info('Unternehmens-','karte erforderlich')),
+entry('$ Lizenzcode',()=>info('Zusatzfunktionen','nicht aktiviert'))]);return}
+let types=['24h Tageswert','!x Ereignis','>> Geschwindig.','Techn. Daten','Karten'];if(group==='Ausdruck')types.push('v-Diagramm');else types.push('Unternehmen','Gewicht','DTCO Version');
+menu('▰ Fahrzeug',types.map(t=>entry(t,()=>{if(t==='Gewicht'){info('Gewicht','nicht verfügbar');return}if(t==='DTCO Version'){show({type:'reading',index:0,lines:['DTCO 4.1','Simulator','Bedienstand','2023-02']});return}if(t==='Unternehmen'){show({type:'reading',index:0,lines:['Unternehmen','---']});return}reportSelect(group,'Fahrzeug',t,null)}))) }
+function reportSelect(group,target,type,i){const next=day=>yesno('Ausdruck in','UTC-Zeit',utc=>{const lines=reportLines(target,type,i,day,utc);if(group==='Anzeige'){show({type:'reading',lines:lines.flatMap(l=>{let out=[];for(let j=0;j<Math.max(1,l.length);j+=16)out.push(l.slice(j,j+16));return out}),index:0})}else startPrint(lines)},true);
+if(/Tageswert|Aktivitäten|Diagramm/.test(type)){let days=Array.from({length:28},(_,n)=>Date.now()-n*86400000);choose(type,days,next,0,x=>dateText(x,false))}else next(Date.now())}
+function reportLines(target,type,i,day,utc){let lines=['DTCO 4.1 · SIM',dateText(Date.now(),!utc)+' '+timeText(Date.now(),!utc),utc?'UTC':'ORTSZEIT','------------------------',target,type,dateText(day,!utc),'------------------------'];
+if(type==='Techn. Daten')lines.push('SIMULATOR','KEIN FAHRZEUG ANGESCHL.','GEBER: ---','KALIBRIERUNG: ---');
+else if(type==='Karten')state.drivers.forEach((d,n)=>lines.push('Schacht '+(n+1)+': '+(d.inserted?d.name:'leer')));
+else if(type==='!x Ereignis')lines.push('Keine Ereignisse');
+else if(type.includes('Geschwindig'))lines.push('Keine Ueberschreitungen');
+else if(type==='v-Diagramm')lines.push('0 km/h','------------------------');
+else{let logs=state.logs.filter(e=>(i===null||e.driver===i)&&dateText(e.at,!utc)===dateText(day,!utc));if(type==='Aktivitäten')logs=state.logs.filter(e=>e.driver===i&&e.at<=day&&e.at>day-7*86400000);if(!logs.length)lines.push('Keine Aufzeichnungen');for(const e of logs){lines.push(timeText(e.at,!utc)+' '+e.kind);if(e.country)lines.push(e.country+' '+(e.region||''));if(e.activity!==undefined)lines.push(activityNames[e.activity]||'?');if(e.start)lines.push(timeText(e.start,!utc)+'-'+timeText(e.end,!utc));if(e.location)lines.push('Ort: nicht verfuegbar')}state.drivers.forEach((d,n)=>{if(d.inserted&&(i===null||i===n)&&dateText(day,!utc)===dateText(Date.now(),!utc))lines.push(timeText(d.since,!utc)+' '+activityNames[d.activity]+' >')});}
+if(i!==null)lines.splice(5,0,state.drivers[i].name);return [...lines,'------------------------',state.km.toFixed(1)+' km','SIMULATION'];}
+function startPrint(lines){if(printerOpen){info('▤ Schublade','offen');return}if(printing){info('Bitte warten!');return}const returnView=stack.findLast(v=>v.type==='menu');printing={lines,returnView,start:Date.now()};notice=null;show({type:'wait',lines:['Ausdruck','gestartet ...']});$('#paper').textContent='';draw()}
+function finishPrint(cancel=false){if(!printing)return;$('#paper').textContent=printing.lines.join('\n')+(cancel?'\n--- ABBRUCH ---':'');$('#paper').classList.add('out');$('#paper').setAttribute('aria-hidden','false');$('.stage').classList.add('printing');view=printing.returnView||{type:'home',index:0};stack=stack.filter(v=>v!==view&&v.type==='menu');printing=null;notice=null;draw()}
+function changeActivity(i){if(flow||view.type==='wait')return;const d=state.drivers[i];d.activity=(d.activity+1)%3;d.since=Date.now();log('Aktivität',{driver:i,activity:d.activity});home()}
+function syncSlots(){state.drivers.forEach((d,i)=>{const slot=$('.slot.'+(i?'two':'one')),card=$('#card'+(i+1));slot.classList.toggle('open',openSlots[i]);card.classList.toggle('available',openSlots[i]);card.classList.remove('inserted');card.textContent=d.inserted?d.name:'KARTE EINLEGEN';card.setAttribute('aria-label',d.inserted?'Fahrerkarte entnehmen':'Fahrerkarte einlegen');card.disabled=!openSlots[i]});syncIdentityCards()}
+function requestCard(i){if(printing){info('Bitte warten!');return}if(flow){if(flow.i===i){yesno((i+1)+'M Eingabe','bestätigen?',v=>{if(v)return;flow=null;home();eject(i)},false)}return}home();if(state.drivers[i].inserted)eject(i);else{openSlots[i]=!openSlots[i];syncSlots();if(openSlots[i])info('▣ Karte!','Schacht '+(i+1),3000)}}
+function cardClick(i){if(!openSlots[i])return;if(state.drivers[i].inserted){state.drivers[i].inserted=false;state.drivers[i].lastOut=Date.now();state.out=false;state.ferry=false;openSlots[i]=false;log('Karte entnommen',{driver:i});syncSlots();home();return}insert(i)}
+function insert(i){home();openSlots[i]=false;let d=state.drivers[i];d.inserted=true;state.out=false;flow={i,insertedAt:Date.now(),start:d.lastOut,end:Date.now(),act:0,entries:[],initialCountry:d.country};syncSlots();view={type:'wait',lines:[(i+1)+'⊙ '+d.name,timeText()+' '+timeText(Date.now(),false)+'UTC']};
+info(view.lines[0],view.lines[1],3000,()=>info('Letzte Entnahme',stamp(d.lastOut),4000,()=>beginSupplement()));}
+function beginSupplement(){stack=[];view={type:'wait',lines:[]};yesno((flow.i+1)+'M Eingabe','Nachtrag?',v=>{flow.entries=[];flow.start=state.drivers[flow.i].lastOut;flow.end=flow.insertedAt;if(v)show({type:'manual',field:0});else beginCountry()},true)}
+function beginCountry(){country('◷> Beginn Land',(c,r)=>{flow.country=c;flow.region=r;confirmEntries()})}
+function confirmEntries(){yesno((flow.i+1)+'M Eingabe','bestätigen?',v=>{if(!v){beginSupplement();return}let d=state.drivers[flow.i];d.country=flow.country||d.country;state.country=d.country;for(const e of flow.entries)log('Nachtrag',{driver:flow.i,...e},e.start);log('Beginn Land',{driver:flow.i,country:d.country,region:flow.region||''});if(!d.known)consent('ITS');else ready()},true)}
+function consent(which){yesno((flow.i+1)+' '+which+' Daten','ausgeben?',v=>{state.drivers[flow.i][which.toLowerCase()]=v;if(which==='ITS')consent('VDO');else ready()},true)}
+function ready(){let i=flow.i;state.drivers[i].known=true;state.drivers[i].since=Date.now();log('Karte gesteckt',{driver:i});home();info(state.drivers.filter(d=>d.inserted).length===2?'⊙⊙ fahrbereit':'⊙ fahrbereit')}
+function eject(i){flow={i,eject:true};country('<◷ Ende Land',(c,r)=>{log('Ende Land',{driver:i,country:c,region:r});state.country=c;flow=null;view={type:'wait',lines:[(i+1)+' '+state.drivers[i].name,'Bitte warten']};info(view.lines[0],view.lines[1],3000,()=>{home();openSlots[i]=true;syncSlots();info('▣ Karte','entnehmen')})})}
+function adjustManual(d){if(view.field===0){flow.act=(flow.act+d+3)%3;return}let dt=localDate(flow.end),field=view.field;if(field===1)dt.setUTCDate(dt.getUTCDate()+d);if(field===2)dt.setUTCMonth(dt.getUTCMonth()+d);if(field===3)dt.setUTCFullYear(dt.getUTCFullYear()+d);if(field===4)dt.setUTCHours(dt.getUTCHours()+d);if(field===5)dt.setUTCMinutes(dt.getUTCMinutes()+d);flow.end=Math.max(flow.start+60000,Math.min(flow.insertedAt,dt.getTime()-state.offset*60000))}
+function press(k){lastInput=Date.now();if(notice){if(view.type==='wait'){return}if(k==='ok'){const done=notice.done;notice=null;if(done)done();draw();return}notice=null}
+if(printing){if(view.type==='choice'){if(k==='up'||k==='down')view.index=1-view.index;else if(k==='ok'){if(view.values[view.index])finishPrint(true);else back()}else if(k==='back')back()}else if(k==='ok')yesno('Ausdruck','abbrechen?',v=>{if(v)finishPrint(true);else back()});draw();return}
+if(view.type==='wait')return;
+if(k==='back'){
+if(view.type==='home'){view.index=0}
+else if(view.type==='manual'){if(view.field>0)view.field--;else if(flow.entries.length){const e=flow.entries.pop();flow.start=e.start;flow.end=e.end;flow.act=e.activity;view.field=5}else back()}
+else if(flow&&view.type==='choice'&&/Land|Region/.test(view.title)){if(flow.eject){flow=null;home()}else confirmEntries()}
+else if(view.type==='menu'&&!view.title){yesno('Menüfunktionen','verlassen',v=>v?home():back())}
+else if(view.type==='choice'&&view.title==='Menüfunktionen')home();else back();draw();return}
+if(k==='up'||k==='down'){let d=k==='up'?-1:1;if(view.type==='home')view.index=(view.index+d+firstPages().length)%firstPages().length;
+else if(view.type==='menu')view.index=(view.index+d+view.nodes.length)%view.nodes.length;
+else if(view.type==='choice')view.index=(view.index+d+view.values.length)%view.values.length;
+else if(view.type==='reading')view.index=Math.max(0,Math.min(view.lines.length-2,view.index+d));
+else if(view.type==='manual')adjustManual(d);
+else if(view.type==='clock')view.offset=Math.max(-720,Math.min(840,view.offset+d*30));draw();return}
+if(k==='ok'){
+if(view.type==='home'){if(view.index===4)choose('Sprache',['Deutsch'],()=>{back();saved()});else rootMenu()}
+else if(view.type==='menu')view.nodes[view.index].run();
+else if(view.type==='choice')view.accept(view.values[view.index]);
+else if(view.type==='manual'){if(view.field<5)view.field++;else{if(flow.end<=flow.start){info('Eingabe falsch');return}flow.entries.push({start:flow.start,end:flow.end,activity:flow.act});if(flow.end>=flow.insertedAt)beginCountry();else{flow.start=flow.end;flow.end=flow.insertedAt;view.field=0}}}
+else if(view.type==='clock'){state.offset=view.offset;back();saved()}}
+draw()}
+// Pointer capture prevents a long press from also producing a short action.
+function bindHold(button,short,long,delay,repeat=false){let timer=null,repeater=null,held=false,down=false,suppress=false;
+const stop=()=>{clearTimeout(timer);clearInterval(repeater);timer=repeater=null};
+button.addEventListener('pointerdown',e=>{if(e.button!==0)return;e.preventDefault();button.focus();button.setPointerCapture(e.pointerId);down=true;held=false;suppress=true;button.classList.add('pressed');if(repeat)short();timer=setTimeout(()=>{held=true;long();if(repeat)repeater=setInterval(long,140)},delay)});
+button.addEventListener('pointerup',()=>{if(!down)return;down=false;stop();button.classList.remove('pressed');if(!held&&!repeat)short()});
+button.addEventListener('pointercancel',()=>{down=false;stop();button.classList.remove('pressed')});
+button.addEventListener('click',e=>{if(suppress){suppress=false;return}if(e.detail===0)short()});
+button.addEventListener('keydown',e=>{if(![' ','Enter'].includes(e.key)||e.repeat)return;e.preventDefault();down=true;held=false;timer=setTimeout(()=>{held=true;long()},delay)});
+button.addEventListener('keyup',e=>{if(![' ','Enter'].includes(e.key))return;e.preventDefault();if(down&&!held)short();down=false;stop()});}
+document.querySelectorAll('[data-key]').forEach(b=>{let k=b.dataset.key;if(k==='up'||k==='down')bindHold(b,()=>press(k),()=>press(k),500,true);else b.addEventListener('click',()=>press(k))});
+document.querySelectorAll('[data-driver]').forEach(b=>{let i=Number(b.dataset.driver)-1;bindHold(b,()=>{lastInput=Date.now();changeActivity(i)},()=>{lastInput=Date.now();requestCard(i)},2000)});
+for(let i=0;i<2;i++)$('#card'+(i+1)).addEventListener('click',()=>{lastInput=Date.now();if(state.drivers[i].inserted)cardClick(i);else slideCardIn(i)});
+$('#print').addEventListener('click',()=>{lastInput=Date.now();if(printing){info('▤ Ausdruck','läuft');return}printerOpen=!printerOpen;$('.printer').classList.toggle('open',printerOpen);info(printerOpen?'▤ Schublade':'▤ Drucker',printerOpen?'offen':'bereit')});
+function tear(){if(printing)return;$('#paper').classList.remove('out');$('#paper').setAttribute('aria-hidden','true');$('.stage').classList.remove('printing')}
+$('#paper').addEventListener('click',tear);$('#paper').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tear()}});
+document.addEventListener('keydown',e=>{if(e.target.matches('button,input,[role=button]')||e.altKey||e.ctrlKey||e.metaKey)return;const k={ArrowUp:'up',ArrowDown:'down',Enter:'ok',Escape:'back'}[e.key];if(k){e.preventDefault();press(k)}});
+setInterval(()=>{blink=!blink;const now=Date.now();if(notice&&now>=notice.end){let done=notice.done;notice=null;if(done)done()}
+if(printing&&view.type!=='choice'&&now-printing.start>=6000)finishPrint();
+if(flow){if(flow.eject&&now-lastInput>60000)home();else if(!flow.eject&&now-lastInput>600000){const i=flow.i;state.drivers[i].inserted=false;openSlots[i]=true;save();home();syncSlots()}else if(!flow.eject&&view.type!=='wait'&&now-lastInput>30000&&!notice)info('! Bitte','Eingabe',30000)}
+else if(view.type!=='home'&&view.type!=='wait'&&!printing&&now-lastInput>30000)home();draw()},500);
+// Editable card identities are local to this file.
+let cardMoving=false;
+state.drivers.forEach((d,i)=>{if(!d.customName&&/^Fahrer [12]$/.test(d.name))d.name='Spieler Name'});
+function syncIdentityCards(){state.drivers.forEach((d,i)=>{const wrap=document.querySelector('[data-card-wrap="'+i+'"]');if(!wrap)return;const label=document.querySelector('[data-name="'+i+'"]');label.textContent=d.customName?d.name:'{Spielername}';label.style.fontSize=d.name.length>26?'2.5cqw':'';document.querySelector('[data-signature="'+i+'"]').textContent=d.name;wrap.classList.toggle('in-device',d.inserted);wrap.hidden=i===1&&!openSlots[i]&&!d.inserted&&!d.customName;const card=wrap.querySelector('.identity-card');card.setAttribute('aria-label','Fahrerkarte '+(i+1)+': '+d.name);})}
+function editCardName(i){if(state.drivers[i].inserted||cardMoving)return;const label=document.querySelector('[data-name="'+i+'"]'),input=document.querySelector('[data-name-input="'+i+'"]');input.value=state.drivers[i].customName?state.drivers[i].name:'';input.hidden=false;label.hidden=true;input.dataset.original=state.drivers[i].name;input.focus();input.select()}
+function finishName(i,cancel=false){const input=document.querySelector('[data-name-input="'+i+'"]'),label=document.querySelector('[data-name="'+i+'"]');if(input.hidden)return;const name=input.value.normalize('NFC').replace(/[\u0000-\u001f\u007f-\u009f]/g,'').replace(/\s+/g,' ').trim().slice(0,36);if(!cancel&&name){state.drivers[i].name=name;state.drivers[i].customName=true;save()}input.hidden=true;label.hidden=false;syncIdentityCards()}
+async function slideCardIn(i){if(cardMoving||state.drivers[i].inserted||flow)return;if(!openSlots[i]){info('▣ Schacht '+(i+1),'öffnen!');return}finishName(i);cardMoving=true;const card=document.querySelector('[data-identity="'+i+'"]'),slot=document.querySelector('.slot.'+(i?'two':'one'));const a=card.getBoundingClientRect(),b=slot.getBoundingClientRect();const clone=card.cloneNode(true);clone.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));clone.setAttribute('aria-hidden','true');Object.assign(clone.style,{position:'fixed',left:a.left+'px',top:a.top+'px',width:a.width+'px',height:a.height+'px',margin:'0',zIndex:'50',pointerEvents:'none',transformOrigin:'50% 0'});document.body.append(clone);card.style.visibility='hidden';const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+try{await clone.animate([{transform:'translate(0,0) scale(1)',opacity:1},{offset:.65,transform:`translate(${b.left+b.width/2-a.left-a.width/2}px,${b.top-a.top}px) scale(.58,.45)`,opacity:1},{transform:`translate(${b.left+b.width/2-a.left-a.width/2}px,${b.top-a.top}px) scale(.58,0)`,opacity:0}],{duration:reduce?0:650,easing:'ease-in-out',fill:'forwards'}).finished}finally{clone.remove();card.style.visibility='';cardMoving=false;lastInput=Date.now();cardClick(i)}}
+document.querySelectorAll('.identity-card').forEach(card=>{const i=Number(card.dataset.identity),label=card.querySelector('.card-name'),input=card.querySelector('.name-input');
+label.addEventListener('dblclick',e=>{e.stopPropagation();editCardName(i)});
+label.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key==='F2'){e.preventDefault();e.stopPropagation();editCardName(i)}});
+input.addEventListener('blur',()=>finishName(i));input.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter'){e.preventDefault();finishName(i);label.focus()}if(e.key==='Escape'){e.preventDefault();finishName(i,true);label.focus()}});
+card.addEventListener('keydown',e=>{if(e.target!==card)return;if(e.key==='Enter'){e.preventDefault();e.stopPropagation();slideCardIn(i)}if(e.key==='F2'){e.preventDefault();e.stopPropagation();editCardName(i)}});
+let start=null,moved=false;
+card.addEventListener('pointerdown',e=>{if(e.target.closest('button,input')||e.button!==0||cardMoving)return;start={x:e.clientX,y:e.clientY};moved=false;card.setPointerCapture(e.pointerId)});
+card.addEventListener('pointermove',e=>{if(!start)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.hypot(dx,dy)>7)moved=true;if(!moved)return;card.classList.add('dragging');card.parentElement.classList.add('dragging');card.style.transform=`translate(${dx}px,${dy}px)`;const slot=document.querySelector('.slot.'+(i?'two':'one'));slot.classList.toggle('drop-ready',openSlots[i])});
+const clearDrag=()=>{start=null;card.classList.remove('dragging');card.parentElement.classList.remove('dragging');card.style.transform='';document.querySelectorAll('.drop-ready').forEach(s=>s.classList.remove('drop-ready'))};
+card.addEventListener('pointerup',e=>{if(!start)return;const slot=document.querySelector('.slot.'+(i?'two':'one')).getBoundingClientRect();const hit=e.clientX>=slot.left-25&&e.clientX<=slot.right+25&&e.clientY>=slot.top-30&&e.clientY<=slot.bottom+45;const shouldInsert=!moved||hit;clearDrag();if(shouldInsert)slideCardIn(i)});
+card.addEventListener('pointercancel',clearDrag);
+});
+
+syncSlots();draw();
+
+let live=initial.live,mutedWarning=null,lastSound='',soundTime=0,bridgeReady=true;
+activities.push(SY.drive);
+document.body.classList.add('desktop-overlay');
+function applyCards(show){document.body.classList.toggle('hide-cards',!show)}applyCards(live.settings.cardsVisible);
+const activityIndex={rest:0,work:1,ready:2,drive:3};
+function beep(){try{const audio=new (window.AudioContext||window.webkitAudioContext)(),osc=audio.createOscillator(),gain=audio.createGain();osc.frequency.value=880;gain.gain.setValueAtTime(.08,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.22);osc.connect(gain);gain.connect(audio.destination);osc.start();osc.stop(audio.currentTime+.24);osc.onended=()=>audio.close()}catch{}}
+const oldRenderLines=renderLines;
+renderLines=function(){
+if(live?.moving&&!live.drivers[0].inserted)return ['Fahren ohne','Karte'];
+if(!notice&&view.type==='home'&&view.index===0&&live){const speed=live.connected?String(Math.round(live.speed)).padStart(3):'---';return [timeText()+'◷ ⊙ '+speed+'km/h',driverSymbol(0)+(live.drivers[0].inserted?'▣':' ')+' '+live.km.toFixed(1).padStart(8)+'km'+(live.drivers[1].inserted?'▣':' ')+driverSymbol(1)]}
+if(!notice&&view.type==='home'&&(view.index===1||view.index===2)&&live){const i=view.index-1,r=live.rules[i];return [(i+1)+'⊙'+dur(r.daily)+' ▱'+dur(r.remainingBreak),'W '+dur(r.weekDrive)+' '+driverSymbol(i)+totals(i)]}
+return oldRenderLines();
+};
+const oldDraw=draw;draw=function(){oldDraw();const noCard=live?.moving&&!live.drivers[0].inserted;if(noCard&&!blink){ctx.fillStyle='#62685c';ctx.fillRect(0,0,340,66)}document.querySelector('.lcd').classList.toggle('no-card-alert',!!noCard)};
+const oldChangeActivity=changeActivity;changeActivity=function(i){if(live.moving){info('Aktivität','Fahrt aktiv');return}oldChangeActivity(i)};
+const oldRequestCard=requestCard;requestCard=function(i){if(live.moving){info('▣ Auswurf','nicht möglich');return}oldRequestCard(i)};
+const oldInsert=insert;insert=function(i){if(live.moving){info('▣ Karte','Bus anhalten!');return}oldInsert(i);save()};
+const oldPress=press;press=function(k){if(k==='ok'&&notice?.trainingWarning){mutedWarning=notice.trainingWarning;notice=null;draw();return}if(live.moving&&view.type==='home'&&k==='ok'){info('Menüzugriff','nicht möglich');return}oldPress(k)};
+const oldVehicleMenu=vehicleMenu;vehicleMenu=function(group){oldVehicleMenu(group);if(group==='Eingabe'&&view.type==='menu')view.nodes.push(entry('Einstellungen',()=>window.tachograph.action('settings')))};
+// Read reports from the persisted timeline, not the old mock event array.
+const originalReportSelect=reportSelect;
+reportSelect=function(group,target,type,i){const next=day=>yesno('Ausdruck in','UTC-Zeit',async utc=>{try{const d=new Date(day);const dayStart=utc?Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1-1,d.getUTCDate()):new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();const dayEnd=utc?dayStart+86400000:new Date(d.getFullYear(),d.getMonth(),d.getDate()+1).getTime();const from=type==='Aktivitäten'?dayStart-6*86400000:dayStart;const report=await window.tachograph.action('report',{slot:i??0,all:i===null,from,to:dayEnd});const label={drive:'Lenkzeit',work:'Arbeit',ready:'Bereitschaft',rest:'Ruhe',unknown:'Unbekannt'};let lines=['DTCO 4.1 · SIM',target,i===null?'':state.drivers[i].name,dateText(day,!utc),utc?'UTC':'ORTSZEIT','ARV1: LINIE EINBEZOGEN','------------------------'];if(type==='Techn. Daten')lines.push(live.vehicle,'Speed: '+live.settings.unit);else if(type==='Karten')live.drivers.forEach((d,n)=>lines.push((n+1)+': '+(d.inserted?d.name:'leer')));else if(type.includes('Geschwindig'))lines.push('Keine Ueberschreitungsdaten');else if(type==='v-Diagramm'){lines.push('Stichproben, ca. 1 Minute');report.telemetry.filter((_,n)=>n%12===0).forEach(t=>lines.push(timeText(t.at,!utc)+' '+t.speed_kmh.toFixed(1)+'km/h '+ '|'.repeat(Math.min(20,Math.round(t.speed_kmh/5)))))}else if(type.includes('Ereignis')){for(const e of report.events){lines.push(timeText(e.at,!utc)+' '+e.type);const p=JSON.parse(e.payload);if(p.text)lines.push(p.text)}}else for(const s of report.segments)lines.push((s.driverName?s.driverName+' ':'')+timeText(s.start,!utc)+'-'+timeText(s.end,!utc)+' '+label[s.activity]);lines.push('------------------------',live.km.toFixed(3)+' km','KEIN AMTLICHER NACHWEIS');if(group==='Anzeige')show({type:'reading',index:0,lines:lines.flatMap(x=>{const result=[];for(let j=0;j<Math.max(1,x.length);j+=16)result.push(x.slice(j,j+16));return result})});else startPrint(lines)}catch(e){info('Datenfehler',String(e.message).slice(0,16))}},true);if(/Tageswert|Aktivitäten|Diagramm/.test(type))choose(type,Array.from({length:28},(_,n)=>Date.now()-n*86400000),next,0,x=>dateText(x,false));else next(Date.now())};
+function receive(s){const wasMoving=live?.moving;live=s;state.km=s.km;for(let i=0;i<2;i++){const a=s.drivers[i].activity;if(a!=='unknown')state.drivers[i].activity=activityIndex[a]??0}if(s.moving&&!wasMoving){if(flow){flow=null;home();info('Eingabe','abgebrochen')}else if(view.type!=='home')home()}
+const a=s.alerts.find(x=>x.level!=='info'&&x.id!=='no-card');if(a&&!flow&&!printing&&view.type==='home'&&(!notice||notice.trainingWarning)){const key=a.id+':'+a.level+':'+s.rules[0].shift;if(key!==mutedWarning){const words=a.text.split(' ');let line1='',line2='';for(const w of words){if((line1+' '+w).trim().length<=16&&!line2)line1=(line1+' '+w).trim();else line2=(line2+' '+w).trim()}info(line1,line2.slice(0,16),8000);notice.trainingWarning=key;if(s.settings.sound&&key!==lastSound&&Date.now()-soundTime>10000){beep();lastSound=key;soundTime=Date.now()}}}
+if(s.moving&&!s.drivers[0].inserted&&s.settings.sound&&Date.now()-soundTime>30000){beep();soundTime=Date.now()}draw()}
+window.tachograph.onLive(receive);window.tachograph.onCommand(c=>{if(c.type==='cards')applyCards(c.visible)});receive(live);
+
+const splashUntil=Date.now()+5000;
+const splashFont={'e':['00000','00000','01110','10001','11111','10000','01110'],'c':['00000','00000','01110','10000','10000','10001','01110'],'h':['10000','10000','10110','11001','10001','10001','10001'],'o':['00000','00000','01110','10001','10001','10001','01110'],'l':['01100','00100','00100','00100','00100','00100','01110'],'i':['00100','00000','01100','00100','00100','00100','01110'],'n':['00000','00000','10110','11001','10001','10001','10001'],'.':['00000','00000','00000','00000','00000','01100','01100'],'m':['00000','00000','11010','10101','10101','10101','10101']};
+const drawBeforeSplash=draw;
+draw=function(){if(Date.now()>=splashUntil){drawBeforeSplash();return}
+ctx.fillStyle='#62685c';ctx.fillRect(0,0,340,66);ctx.fillStyle='#707568';for(let x=0;x<340;x+=3)for(let y=0;y<66;y+=3)ctx.fillRect(x,y,1,1);
+const word='echolino.com',sc=4,w=word.length*6*sc-sc;let x=(340-w)/2;for(const ch of word){splashFont[ch].forEach((row,r)=>[...row].forEach((v,c)=>{if(v==='1'){ctx.fillStyle='#d9decf';ctx.fillRect(x+c*sc,19+r*sc,sc*.88,sc*.88)}}));x+=6*sc}
+if($('#screenText').textContent!=='echolino.com')$('#screenText').textContent='echolino.com'};
+draw();setTimeout(()=>draw(),splashUntil-Date.now()+50);
+
+
+}
+startDevice().catch(e=>{window.__bootError=e.stack||String(e);document.querySelector('#screenText').textContent='Startfehler: '+e.message;console.error(e)});
+</script>
+</body>
+</html>
