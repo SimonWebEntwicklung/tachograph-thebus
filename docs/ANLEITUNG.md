@@ -22,6 +22,8 @@ Node.js, Python oder zusätzliche Programme werden nicht gebraucht.
 
 Beenden: Rechtsklick auf das Symbol im Windows-Infobereich, dann „Beenden“. Alt+F4 verbirgt nur das Gerät, die Aufzeichnung läuft weiter.
 
+**Neu hier oder noch nie einen Fahrtenschreiber bedient?** Die Datei **BEBILDERTE-ANLEITUNG.html** im selben Ordner zeigt mit echten Bildschirmfotos Schritt für Schritt, was ein Fahrtenschreiber überhaupt ist und wie Fahrerkarte, Menü und Ausdruck funktionieren. Einfach im Browser öffnen.
+
 ## Bedienung
 
 | Aktion | So geht es |
@@ -31,11 +33,27 @@ Beenden: Rechtsklick auf das Symbol im Windows-Infobereich, dann „Beenden“. 
 | Bedienung / Maus zum Spiel durchreichen | **Strg+Alt+T** |
 | Gerät ein-/ausblenden (Aufzeichnung läuft weiter) | **Strg+Alt+O** |
 | Fahrerkarte ein-/ausblenden | **Strg+Alt+K** |
+| Nachtmodus (gedimmtes Display) | **Strg+Alt+N** |
+| Grösse Mini / Normal / Gross | **Strg+Alt+1 / 2 / 3** |
 | Simulation pausieren / fortsetzen | **Strg+Alt+P** |
 | Einstellungen, Aufzeichnungen, Nachträge, Export | **Strg+Alt+E** |
 | App-Menü | Rechtsklick auf eine Gerätetaste oder auf das Symbol im Infobereich |
 
 **Menü:** Mit den Tasten Zurück, Hoch, Runter und OK am Gerät (mit der Maus).
+
+## Vollständige Tastatur- und Controller-Steuerung
+
+Für alle, die ohne Maus spielen (z. B. mit Lenkrad und Pedalen), lässt sich das Gerät komplett über Tastatur oder Gamepad bedienen. Auf der Tastatur wird bewusst **nur Strg + Nummernblock** genutzt, damit nichts mit den Tasten von The Bus (Pfeiltasten, WASD, Q/W/P/T, Escape, blosser Nummernblock usw.) kollidiert:
+
+| Funktion | Tastatur | Controller |
+|---|---|---|
+| Menü: Hoch / Runter / OK / Zurück | **Strg+Num 8** / **Strg+Num 2** / **Strg+Num 5** / **Strg+Num 0** | Steuerkreuz (Dpad) / A / B |
+| Aktivität Fahrer 1 / 2 wechseln | **Strg+Num 1** / **Strg+Num 3** | LB / RB |
+| Fahrerkarte 1 / 2 auswerfen | **Strg+Num 4** / **Strg+Num 6** | LT / RT |
+| Druckerschublade öffnen/schliessen | **Strg+Num 7** | Start |
+| Ausdruck abreissen | **Strg+Num 9** | Select/Back |
+
+Ein angeschlossener Controller wird automatisch erkannt, keine Einrichtung nötig. Die Hotkeys wirken nicht, solange ein Eingabefeld (z. B. der Kartenname) fokussiert ist. Hat deine Tastatur keinen eigenen Nummernblock (z. B. kompakte Notebook-Tastatur), bedienst du das Gerät wie gewohnt per Maus.
 
 **Fahrerkarte einschieben:** Auf den Kartennamen doppelklicken, einen Namen eingeben, Enter drücken. Die Fahrertaste (1 oder 2) mindestens zwei Sekunden halten, bis der Schacht öffnet. Die Karte anklicken oder zum Schacht ziehen. Danach Nachtrag, Land und Bestätigung am Gerät abschliessen.
 
@@ -46,6 +64,14 @@ Beenden: Rechtsklick auf das Symbol im Windows-Infobereich, dann „Beenden“. 
 **Ohne Karte fahren:** Ist in Schacht 1 keine Karte, blinkt „Fahren ohne Karte“. Die Fahrt wird als nicht zugeordnete Lenkzeit protokolliert.
 
 **Drucken:** Über das Gerätemenü. Den Ausdruck mit dem Schnitt abreissen.
+
+## Gerätemodell
+
+In den Einstellungen (**Strg+Alt+E**) lässt sich das Gerätemodell wählen: **VDO DTCO 4.1** oder **VDO DTCO 1381**. Beide Modelle zeigen dasselbe aufgezeichnete Fahrverhalten, unterscheiden sich aber bei Bedienfeld, Menüführung, Ausdrucken und Warnton – nachgebildet nach der jeweiligen Originalbedienungsanleitung. Beim DTCO 1381 wird die Fahrerkarte über eine eigene Auswurftaste neben dem Kartenschacht entnommen statt per langem Tastendruck.
+
+## Nachtmodus
+
+**Strg+Alt+N** dimmt das Display (gedimmte Hintergrundbeleuchtung wie bei manchen echten Geräten in der Dunkelheit). Lässt sich auch in den Einstellungen dauerhaft aktivieren.
 
 ## Spielpause
 
